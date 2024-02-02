@@ -2,6 +2,11 @@
 
 > goctl is a manager tool for micro framework go-zero.
 
+## Install goctl
+```shell
+GOPROXY=https://goproxy.cn/,direct go install github.com/zeromicro/go-zero/tools/goctl@latest
+```
+
 ## Install
 
 -- lazy.nvim
