@@ -19,24 +19,24 @@ local function subcommands(opts)
 	end, cmds)
 
 	pickers
-		.new(opts, {
-			prompt_title = "Telescope Goctl",
-			finder = finders.new_table({
-				results = cmds,
-			}),
-			-- sorter = conf.generic_sorter(opts),
-			attach_mappings = function(prompt_bufnr)
-				actions.select_default:replace(function()
-					local selection = action_state.get_selected_entry()
-					actions.close(prompt_bufnr)
-					vim.defer_fn(function()
-						require("telescope").extensions.goctl[selection.value](opts)
-					end, 20)
-				end)
-				return true
-			end,
-		})
-		:find()
+			.new(opts, {
+				prompt_title = "Telescope Goctl",
+				finder = finders.new_table({
+					results = cmds,
+				}),
+				-- sorter = conf.generic_sorter(opts),
+				attach_mappings = function(prompt_bufnr)
+					actions.select_default:replace(function()
+						local selection = action_state.get_selected_entry()
+						actions.close(prompt_bufnr)
+						vim.defer_fn(function()
+							require("telescope").extensions.goctl[selection.value](opts)
+						end, 20)
+					end)
+					return true
+				end,
+			})
+			:find()
 end
 
 return require("telescope").register_extension({
@@ -51,13 +51,7 @@ return require("telescope").register_extension({
 	exports = {
 		goctl = subcommands,
 		env = common.goctl_env,
-		upgrade = function()
-			if not common.goctl_check() then
-				common.goctl_install()
-			else
-				common.goctl_upgrade()
-			end
-		end,
+		upgrade = common.install_or_upgrade,
 		format = goctl_api.format,
 		api_new = goctl_api.new,
 		api_doc = goctl_api.doc,

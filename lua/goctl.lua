@@ -37,13 +37,7 @@ local function set_commands()
 	local cmd = api.nvim_create_user_command
 
 	-- common --
-	cmd("GoctlUpgrade", function()
-		if not common.goctl_check() then
-			common.goctl_install()
-		else
-			common.goctl_upgrade()
-		end
-	end, {})
+	cmd("GoctlUpgrade", common.install_or_upgrade, {})
 
 	cmd("GoctlEnv", common.goctl_env, {})
 

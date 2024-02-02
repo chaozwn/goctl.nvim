@@ -43,4 +43,12 @@ function M.goctl_env()
 	job:new(cmd)
 end
 
+function M.install_or_upgrade()
+	if not M.goctl_check() then
+		M.goctl_install()
+	else
+		M.goctl_upgrade()
+	end
+end
+
 return M
