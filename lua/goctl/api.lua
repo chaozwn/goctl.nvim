@@ -25,13 +25,13 @@ local function on_validate_stderr(_, data)
 		local col = tonumber(string.sub(msg, i + 1, j))
 		msg = string.sub(msg, j + 1)
 
-      -- stylua: ignore
-			vim.diagnostic.set(ns, 0, {{
-					bufnr = 0,
-					lnum = row - 1,
-					col = col,
-					message = msg,
-				}}, nil)
+		-- stylua: ignore
+		vim.diagnostic.set(ns, 0, { {
+			bufnr = 0,
+			lnum = row - 1,
+			col = col,
+			message = msg,
+		} }, nil)
 	end
 end
 
@@ -48,7 +48,7 @@ end
 ---Validate api file
 ---
 function M.validate()
-	local cmd = { "goctl", "api", "format", "-stdin" }
+	local cmd = { "goctl", "api", "format", "--stdin" }
 	local job_id = fn.jobstart(cmd, {
 		on_stderr = on_validate_stderr,
 		stderr_buffered = true,
@@ -62,7 +62,7 @@ end
 ---Format api file
 ---
 function M.format()
-	local cmd = { "goctl", "api", "format --stdin" }
+	local cmd = { "goctl", "api", "format", "--stdin" }
 	local job_id = fn.jobstart(cmd, {
 		on_stdout = on_format_stdout,
 		stdout_buffered = true,
@@ -116,16 +116,16 @@ function M.generate()
 	end
 
 	local ts_webapi_submit = function(item)
-    -- stylua: ignore
+		-- stylua: ignore
 		input:new(item.text, "", function(value)
 			local path = vim.trim(value)
 			if path == "" then
 				return
 			end
-      table.insert(cmd, item.value)
-      table.insert(cmd, path)
+			table.insert(cmd, item.value)
+			table.insert(cmd, path)
 
-      job:new(cmd)
+			job:new(cmd)
 		end):display()
 	end
 
@@ -162,7 +162,7 @@ function M.generate()
 				{ text = "WebApi", value = "--webapi" },
 			}, ts_webapi_submit):display()
 		elseif type == "dart" then
-      -- stylua: ignore
+			-- stylua: ignore
 			input:new("Hostname", "go-zero.dev", dart_hostname_submit):display()
 		end
 	end
