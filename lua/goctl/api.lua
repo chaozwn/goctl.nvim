@@ -48,7 +48,7 @@ end
 ---Validate api file
 ---
 function M.validate()
-	local cmd = { "goctl", "api", "format", "--stdin" }
+	local cmd = { "goctl", "api", "format", "-stdin" }
 	local job_id = fn.jobstart(cmd, {
 		on_stderr = on_validate_stderr,
 		stderr_buffered = true,
