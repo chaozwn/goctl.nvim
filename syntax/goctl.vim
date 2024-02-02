@@ -41,4 +41,10 @@ hi def link     apiRawString         String
 syn region      apiCharacter         start=+'+ skip=+\\\\\|\\'+ end=+'+
 hi def link     apiCharacter         Character
 
+syn match apiSingleLineComment "//.*" contains=@Spell
+hi def link apiSingleLineComment Comment
+
+syn region apiMultiLineComment start="/\*" end="\*/" contains=@Spell
+hi def link apiMultiLineComment Comment
+
 let b:current_syntax = 'goctl'
