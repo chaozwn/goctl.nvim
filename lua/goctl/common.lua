@@ -23,8 +23,11 @@ end
 
 ---Install goctl
 function M.goctl_install()
-	local cmd =
-		{ "GOPROXY=https://goproxy.cn/,direct", "go", "install", "github.com/zeromicro/go-zero/tools/goctl@latest" }
+	local cmd = {
+		"GOPROXY=https://goproxy.cn/,direct go",
+		"install",
+		"github.com/zeromicro/go-zero/tools/goctl@latest",
+	}
 	job:new(cmd)
 
 	cmd = { "goctl", "env", "check", "-i", "-f", "-v" }
