@@ -50,15 +50,15 @@ local function set_commands()
 	-- util ---
 	cmd("GoctlApiFormat", goctl_api.format, {})
 
-	-- cmd("GoctlApiNew", goctl_api.new, {})
-	-- cmd("GoctlApiDoc", goctl_api.doc, {})
-	-- cmd("GoctlApiGenerate", goctl_api.generate, {})
-	-- cmd("GoctlApi", goctl_api.menu, {})
+	cmd("GoctlApiNew", goctl_api.new, {})
+	cmd("GoctlApiDoc", goctl_api.doc, {})
+	cmd("GoctlApiGenerate", goctl_api.generate, {})
+	cmd("GoctlApi", goctl_api.menu, {})
 
-	-- cmd("GoctlRpcNew", goctl_rpc.new, {})
-	-- cmd("GoctlRpcProtoc", goctl_rpc.protoc, {})
+	cmd("GoctlRpcNew", goctl_rpc.new, {})
+	cmd("GoctlRpcProtoc", goctl_rpc.protoc, {})
 
-	-- cmd("GoctlModel", goctl_model.menu, {})
+	cmd("GoctlModel", goctl_model.menu, {})
 end
 
 function M.setup()
