@@ -1,7 +1,6 @@
 local M = {}
 
 local menu = require("goctl.ui.menu")
-local notify = require("goctl.notify")
 local util = require("goctl.util")
 local job = require("goctl.job")
 

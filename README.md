@@ -1,22 +1,38 @@
 # Goctl plugin for Neovim
 
-> goctl is a manager tool for micro framework go-zero
+> goctl is a manager tool for micro framework go-zero.
 
 ## Install
 
-- packer.nvim
-
+-- lazy.nvim
 ```lua
-use({ "BYT0723/goctl.nvim", run = ":GoctlUpgrade", requires = {"MunifTanjim/nui.nvim"} })
-
--- recommend
-use("rcarriga/nvim-notify")
-```
-
-## Init
-
-```lua
-require("goctl").setup()
+  {
+    "chaozwn/goctl.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
+    ft = "goctl",
+    opts = function()
+      local group = vim.api.nvim_create_augroup("GoctlAutocmd", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = group,
+        pattern = "goctl",
+        callback = function()
+          -- set up format keymap
+          vim.keymap.set(
+            "n",
+            "<Leader>lf",
+            "<Cmd>GoctlApiFormat<CR>",
+            { silent = true, noremap = true, buffer = true, desc = "Format Buffer" }
+          )
+          vim.keymap.set(
+            "n",
+            "<Leader>fg",
+            "<cmd>Telescope goctl<CR>",
+            { silent = true, noremap = true, buffer = true, desc = "Jump to error line" }
+          )
+        end,
+      })
+    end,
+  },
 ```
 
 ## Features

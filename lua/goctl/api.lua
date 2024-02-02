@@ -82,7 +82,7 @@ function M.new()
 		end
 
 		if fn.isdirectory(fn.getcwd() .. "/" .. path) == 1 then
-			notify:Warn("Path already exists")
+			notify.warn("Path already exists")
 			return
 		end
 

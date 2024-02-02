@@ -1,19 +1,15 @@
 local M = {}
 
-local opt = {
-	title = "Goctl.nvim",
-}
-
-function M:Info(msg)
-	vim.notify(msg, vim.log.levels.INFO, opt)
+function M.info(msg)
+	vim.notify(msg, vim.log.levels.INFO)
 end
 
-function M:Error(msg)
-	vim.notify(msg, vim.log.levels.ERROR, opt)
+function M.error(msg)
+	vim.notify(msg, vim.log.levels.ERROR)
 end
 
-function M:Warn(msg)
-	vim.notify(msg, vim.log.levels.WARN, opt)
+function M.warn(msg)
+	vim.notify(msg, vim.log.levels.WARN)
 end
 
 return M
