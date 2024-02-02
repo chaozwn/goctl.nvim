@@ -5,6 +5,7 @@
 ## Install goctl
 ```shell
 GOPROXY=https://goproxy.cn/,direct go install github.com/zeromicro/go-zero/tools/goctl@latest
+goctl env check -i -f -v
 ```
 
 ## Install
