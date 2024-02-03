@@ -22,9 +22,16 @@ syn region apiExplainHandler start="@handler" end="\n"
 syn region apiExplainDoc     start="@doc"     end="\n"
 
 hi def link apiStatement      Statement
-hi def link apiExplainServer  Comment
-hi def link apiExplainHandler Comment
-hi def link apiExplainDoc     Comment
+hi def link apiExplainServer  Normal
+hi def link apiExplainHandler Normal
+hi def link apiExplainDoc     Normal 
+
+syn match apiServer "@server"
+syn match apiHandler "@handler"
+syn match apiDoc "@doc"
+hi def link apiServer Keyword
+hi def link apiHandler Keyword
+hi def link apiDoc Keywor
 
 "-----------------------------------
 
