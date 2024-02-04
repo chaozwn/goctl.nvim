@@ -36,15 +36,6 @@ local function on_validate_stderr(_, data)
 end
 
 ---
---- format stdout event
----
-local function on_format_stdout(_, data)
-	if table.concat(data) ~= "" then
-		api.nvim_buf_set_lines(0, 0, -1, false, data)
-	end
-end
-
----
 ---Validate api file
 ---
 function M.validate()
@@ -58,18 +49,27 @@ function M.validate()
 	fn.chanclose(job_id, "stdin")
 end
 
+local function on_event(job_id, data, event)
+	if event == "stdout" and not vim.tbl_isempty(data) then
+		vim.cmd([[edit!]])
+	elseif event == "stderr" and not vim.tbl_isempty(data) then
+		vim.notify(table.concat(data, "\n"), vim.log.levels.ERROR)
+	end
+end
+
 ---
----Format api file
+--- Format api file and save it before formatting
 ---
 function M.format()
-	local cmd = { "goctl", "api", "format", "--stdin" }
-	local job_id = fn.jobstart(cmd, {
-		on_stdout = on_format_stdout,
-		stdout_buffered = true,
+	-- 保存当前缓冲区
+	vim.cmd([[update]])
+
+	local path = vim.api.nvim_buf_get_name(0)
+	local cmd = { "goctl", "api", "format", "--dir", path }
+	vim.fn.jobstart(cmd, {
+		on_stdout = on_event,
+		on_stderr = on_event,
 	})
-	local lines = api.nvim_buf_get_lines(0, 0, -1, false)
-	fn.chansend(job_id, lines)
-	fn.chanclose(job_id, "stdin")
 end
 
 function M.new()
