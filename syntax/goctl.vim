@@ -31,7 +31,7 @@ syn match apiHandler "@handler"
 syn match apiDoc "@doc"
 hi def link apiServer Keyword
 hi def link apiHandler Keyword
-hi def link apiDoc Keywor
+hi def link apiDoc Keyword
 
 "-----------------------------------
 
