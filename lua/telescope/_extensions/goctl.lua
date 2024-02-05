@@ -6,8 +6,6 @@ local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 local goctl_api = require("goctl.api")
-local goctl_rpc = require("goctl.rpc")
-local goctl_model = require("goctl.model")
 
 local function subcommands(opts)
 	if config.theme then
@@ -51,14 +49,6 @@ return require("telescope").register_extension({
 	exports = {
 		goctl = subcommands,
 		env = common.goctl_env,
-		upgrade = common.install_or_upgrade,
 		format = goctl_api.format,
-		api_new = goctl_api.new,
-		api_doc = goctl_api.doc,
-		api_generate = goctl_api.generate,
-		api_menu = goctl_api.menu,
-		rpc_new = goctl_rpc.new,
-		rpc_protoc = goctl_rpc.protoc,
-		model_menu = goctl_model.menu,
 	},
 })

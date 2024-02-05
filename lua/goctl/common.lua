@@ -1,6 +1,5 @@
 local M = {}
 
-local api, fn = vim.api, vim.fn
 local job = require("goctl.job")
 local notify = require("goctl.notify")
 
@@ -21,37 +20,10 @@ function M.goctl_check()
 	return status
 end
 
----Install goctl
-function M.goctl_install()
-	local cmd = {
-		"GOPROXY=https://goproxy.cn/,direct go",
-		"install",
-		"github.com/zeromicro/go-zero/tools/goctl@latest",
-	}
-	job:new(cmd)
-
-	cmd = { "goctl", "env", "check", "-i", "-f", "-v" }
-	job:new(cmd)
-end
-
----Upgrade goctl
-function M.goctl_upgrade()
-	local cmd = { "goctl", "upgrade" }
-	job:new(cmd)
-end
-
 ---Check goctl environment
 function M.goctl_env()
 	local cmd = { "goctl", "env" }
-	job:new(cmd)
-end
-
-function M.install_or_upgrade()
-	if not M.goctl_check() then
-		M.goctl_install()
-	else
-		M.goctl_upgrade()
-	end
+	job.new(cmd)
 end
 
 return M

@@ -16,6 +16,7 @@ goctl env check -i -f -v
     "chaozwn/goctl.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
     ft = "goctl",
+    enabled = vim.fn.executable "goctl",
     opts = function()
       local group = vim.api.nvim_create_augroup("GoctlAutocmd", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
@@ -56,13 +57,6 @@ use command `GoctlApiFormat` or lua
 vim.api.nvim_command("au BufWritePre *.api lua require('goctl.api').format()")
 ```
 
-- ApiMenu
-use command `GoctlApi` or lua
-
-```lua
-require("goctl.api").menu()
-```
-
 ## Preview
 
 <details>
@@ -75,20 +69,4 @@ require("goctl.api").menu()
     <img src="./images/goctl-format.gif" />
 </details>
 
-<details>
-    <summary>Api</summary>
-    <img src="./images/goctl_api_menu.jpg" />
-</details>
 
-<details>
-    <summary>ApiNew</summary>
-    <img src="./images/goctl_api_new.jpg" />
-</details>
-<details>
-    <summary>ApiGenerate</summary>
-    <img src="./images/goctl_api_generate.jpg" />
-</details>
-
-## Other
-
-> plugin is being developed. We look forward to your participation and suggestions

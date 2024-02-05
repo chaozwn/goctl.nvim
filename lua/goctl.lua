@@ -2,10 +2,7 @@ local M = {}
 local api = vim.api
 
 local common = require("goctl.common")
-local command = require("goctl.command")
 local goctl_api = require("goctl.api")
-local goctl_rpc = require("goctl.rpc")
-local goctl_model = require("goctl.model")
 
 -- variable
 local FILETYPE = "goctl"
@@ -35,30 +32,12 @@ end
 
 local function set_commands()
 	local cmd = api.nvim_create_user_command
-
-	-- common --
-	cmd("GoctlUpgrade", common.install_or_upgrade, {})
-
 	cmd("GoctlEnv", common.goctl_env, {})
-
 	-- util ---
 	cmd("GoctlApiFormat", goctl_api.format, {})
-
-	cmd("GoctlApiNew", goctl_api.new, {})
-	cmd("GoctlApiDoc", goctl_api.doc, {})
-	cmd("GoctlApiGenerate", goctl_api.generate, {})
-	cmd("GoctlApi", goctl_api.menu, {})
-
-	cmd("GoctlRpcNew", goctl_rpc.new, {})
-	cmd("GoctlRpcProtoc", goctl_rpc.protoc, {})
-
-	cmd("GoctlModel", goctl_model.menu, {})
 end
 
 function M.setup()
-	vim.filetype.add({
-		goctl = "goctl",
-	})
 	set_autocommands()
 	set_commands()
 end

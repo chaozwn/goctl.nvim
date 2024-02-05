@@ -26,7 +26,7 @@ local function on_event(job_id, data, event)
 	end
 end
 
-function M:new(cmd)
+function M.new(cmd)
 	fn.jobstart(cmd, {
 		on_stdout = on_event,
 		on_stderr = on_event,
