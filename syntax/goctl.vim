@@ -2,6 +2,7 @@ if exists('b:current_syntax') | finish | endif
 
 syn case match
 
+" set up keywords
 syn keyword apiVersion        syntax
 syn keyword apiImport         import 
 syn keyword apiTypeDelaration type   
@@ -36,9 +37,18 @@ hi def link apiDoc Keyword
 "-----------------------------------
 
 syn keyword apiType bool int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64 uintptr  float32 float64 complex64 complex128 string byte rune
-hi def link     apiType              Type
+hi def link     apiType              Function
 
 " Strings and their contents
+syn match apiTypeName "\w\+\(-\w\+\)*\s*{" 
+hi def link apiTypeName Type
+
+" syn match serviceName "\w\+\s*{" contains=apiService
+" hi def link serviceName Type
+
+syn region      apiVaiable           start=+(+ end=+)+
+hi def link apiVaiable Type
+
 syn region      apiString            start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn region      apiRawString         start=+`+ end=+`+
 
