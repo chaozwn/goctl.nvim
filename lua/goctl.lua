@@ -6,7 +6,7 @@ local goctl_api = require("goctl.api")
 
 -- variable
 local FILETYPE = "goctl"
-local AUGROUP = "Goctl"
+local AUGROUP = "GOCTL"
 
 local function set_autocommands()
 	api.nvim_create_augroup(AUGROUP, { clear = true })
